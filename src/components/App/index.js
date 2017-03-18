@@ -1,39 +1,56 @@
 import React from 'react';
-import axios from 'axios';
+import queryService from '../api';
 
-const queryService = url => {
-    axios
-        .get(`/rating?url${url}`)
-        .then((res) => {
-            return res.data;
-        });
-};
-
-const rating = () => {
-    const getCurrentTabUrl = callback => {
-        const queryInfo = {
-            active: true,
-            currentWindow: true
-        };
-
-        chrome.tabs.query(queryInfo, tabs => {
-            const tab = tabs[0];
-            const url = tab.url;
-            return url;
-        });
+const getCurrentTabUrl = () => {
+    const queryInfo = {
+        active: true,
+        currentWindow: true
     };
 
-    document.addEventListener('DOMContentLoaded', () => {
-        return queryService(getCurrentTabUrl());
+    return new Promise((resolve, reject) => {
+        chrome.tabs.query(queryInfo, tabs => {
+            const tab = tabs[0];
+            const url = tab.url;  
+            resolve(url);  
+        });
     });
 };
 
-const displayText = rating() == 1 ? 'is reliable' : 'is not reliable';
+const rating = () => {
+    return new Promise((resolve, reject) => {
+        document.addEventListener('DOMContentLoaded', () => {
+            getCurrentTabUrl().then((url) => {
+                return queryService(url);
+            }).then((data) => {
+                resolve(data.rating);
+            });
+        });
+    });
+};
 
-const App = () => {
-    return (
-        <h1>I heard through the grape vine this article {displayText}</h1>
-    );
+class App extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            message: ''
+        };
+    }
+
+    getText() {
+        rating().then((rating) => {
+            this.setState({message: rating});
+        });
+    }
+
+    componentDidMount() {
+        this.getText();
+    }
+
+    render() {
+        return (
+            <h1>I heard through the grape vine this article {this.state.message}</h1>
+        );
+    }
 };
 
 export default App;
