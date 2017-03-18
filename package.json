@@ -1,0 +1,45 @@
+{
+  "name": "hittgv",
+  "version": "1.0.0",
+  "description": "Heard it through the grape vine",
+  "main": "popup.js",
+  "dependencies": {
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-fontawesome": "^1.5.0",
+    "talkify": "^2.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "css-loader": "^0.26.1",
+    "css-modules-require-hook": "^4.0.5",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.24.1",
+    "json-loader": "^0.5.4",
+    "postcss-cssnext": "^2.9.0",
+    "postcss-import": "^9.0.0",
+    "postcss-loader": "^1.2.1",
+    "style-loader": "^0.13.1",
+    "uglify-loader": "^1.4.0",
+    "url-loader": "^0.5.7",
+    "webpack-dev-server": "^1.16.2",
+    "webpack": "^2.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hittgv/hittgv.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hittgv/hittgv/issues"
+  },
+  "homepage": "https://github.com/hittgv/hittgv#readme"
+}
