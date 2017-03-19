@@ -42,7 +42,7 @@ class App extends React.Component {
     getText() {
         rating().then((rating) => {
             this.setState({
-                message: rating > 50 ? 'We can\'t find anything wrong with this webapage' : 'This news is likely to be fake'
+                message: rating > 50 ? 'We don\'t have enough data to verify this webpage' : 'This news is likely to be fake'
             });
             console.log(this.state);
         });
