@@ -16,6 +16,13 @@ module.exports = {
                 options: { presets: ['es2015', 'react'] }
                 }],
             },
+            {
+                test: /\.svg$/,
+                exclude: [/node_modules/],
+                use: [{
+                    loader: 'url-loader'
+                }]
+            }
         ],
     },
 };

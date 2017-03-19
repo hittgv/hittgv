@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 201);
+/******/ 	return __webpack_require__(__webpack_require__.s = 202);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -9962,6 +9962,10 @@ var _api = __webpack_require__(104);
 
 var _api2 = _interopRequireDefault(_api);
 
+var _logo = __webpack_require__(201);
+
+var _logo2 = _interopRequireDefault(_logo);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9991,6 +9995,7 @@ var rating = function rating() {
             getCurrentTabUrl().then(function (url) {
                 return (0, _api2.default)(url);
             }).then(function (data) {
+                console.log(data);
                 resolve(data.rating);
             });
         });
@@ -10017,7 +10022,10 @@ var App = function (_React$Component) {
             var _this2 = this;
 
             rating().then(function (rating) {
-                _this2.setState({ message: rating });
+                _this2.setState({
+                    message: rating > 50 ? 'We can\'t find anything wrong with this webapage' : 'This news is likely fake'
+                });
+                console.log(_this2.state);
             });
         }
     }, {
@@ -10029,10 +10037,19 @@ var App = function (_React$Component) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'h1',
+                'section',
                 null,
-                'I heard through the grape vine this article ',
-                this.state.message
+                _react2.default.createElement('img', { className: 'logo', src: _logo2.default }),
+                _react2.default.createElement(
+                    'h1',
+                    null,
+                    'I heard it through the grape vine'
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    this.state.message
+                )
             );
         }
     }]);
@@ -10917,7 +10934,7 @@ var queryService = function queryService(url) {
     var urlEncoded = encodeURIComponent(url);
 
     return new Promise(function (resolve, reject) {
-        _axios2.default.get('http://ec2-35-157-232-74.eu-central-1.compute.amazonaws.com/rating?url=' + urlEncoded).then(function (res) {
+        _axios2.default.get('https://query-service.herokuapp.com/rating?url=' + urlEncoded).then(function (res) {
             resolve(res.data);
         });
     });
@@ -23147,6 +23164,12 @@ module.exports = traverseAllChildren;
 
 /***/ }),
 /* 201 */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjYwOXB4IiBoZWlnaHQ9IjYwOHB4IiB2aWV3Qm94PSIwIDAgNjA5IDYwOCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNDEuMiAoMzUzOTcpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPlNsaWNlIDE8L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8cG9seWdvbiBpZD0iUGF0aC0yIiBmaWxsPSIjNEIzRjlEIiBwb2ludHM9IjU5OS4zMzA5MTMgMC4xNTY4OTA1OTIgMC44MDc3MzY1MzMgMC4xNTY4OTA1OTIgMC44MDc3MzY1MzMgNTkxLjIzNzcxNSAyODguMTkzMTggMzAzLjg1MjI3MSAyMDUuMjY5Nzc1IDIyMC45Mjg4NjYgMTYyLjgwMDE2MiAyNjMuMzk4NDc5IDIwNi4wNzQyNzcgMzA2LjY3MjU5NCA1Ni4wNTE2MjkgNDU2LjY5NTI0MyA1Ni4wNTE2MjkgNDguNzEyMTcwNyA1NDMuOTMzMDk0IDQ4LjcxMjE3MDciPjwvcG9seWdvbj4KICAgICAgICA8cG9seWdvbiBpZD0iUGF0aC0zIiBmaWxsPSIjNEIzRjlEIiBwb2ludHM9IjIwLjE1MDM2NjYgNjA3LjgwMTI2MSA2MDguNDgxNjIzIDE5LjQ3MDAwNDcgNjA4LjQ4MTYyMyA5OC41ODgzNDMgMTUwLjEzMTM2OSA1NTYuOTM4NTk3IDYwOC45MDM5MzkgNTU2LjkzODU5NyA2MDguOTAzOTM5IDYwNy41NzA0NDUiPjwvcG9seWdvbj4KICAgIDwvZz4KPC9zdmc+"
+
+/***/ }),
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

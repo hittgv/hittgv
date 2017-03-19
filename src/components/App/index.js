@@ -1,6 +1,8 @@
 import React from 'react';
 import queryService from '../api';
 
+import logo from '../assets/logo.svg';
+
 const getCurrentTabUrl = () => {
     const queryInfo = {
         active: true,
@@ -22,6 +24,7 @@ const rating = () => {
             getCurrentTabUrl().then((url) => {
                 return queryService(url);
             }).then((data) => {
+                console.log(data);
                 resolve(data.rating);
             });
         });
@@ -38,7 +41,10 @@ class App extends React.Component {
 
     getText() {
         rating().then((rating) => {
-            this.setState({message: rating});
+            this.setState({
+                message: rating > 50 ? 'We can\'t find anything wrong with this webapage' : 'This news is likely fake'
+            });
+            console.log(this.state);
         });
     }
 
@@ -48,7 +54,11 @@ class App extends React.Component {
 
     render() {
         return (
-            <h1>I heard through the grape vine this article {this.state.message}</h1>
+            <section>
+                <img className="logo" src={logo}/>
+                <h1>I heard it through the grape vine</h1>
+                <p>{this.state.message}</p>
+            </section>
         );
     }
 };
